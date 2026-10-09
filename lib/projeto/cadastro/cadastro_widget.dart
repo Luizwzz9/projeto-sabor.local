@@ -2,6 +2,7 @@ import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -501,6 +502,62 @@ class _CadastroWidgetState extends State<CadastroWidget> {
                             keyboardType: (FFKeyboardType.number).flutterValue,
                             validator: _model.cadastroCPFTextControllerValidator
                                 .asValidator(context),
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              if (functions.validarCPF(
+                                  _model.cadastroCPFTextController.text)) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('OK!'),
+                                      content: Text('CPF Validado'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return;
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Ops, Algo deu errado'),
+                                      content: Text('CPF Invalido'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Erro'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return;
+                              }
+                            },
+                            text: 'CONSULTAR',
+                            options: FFButtonOptions(
+                              width: double.infinity,
+                              height: 52.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: Color(0xFFF0EAEA),
+                              textStyle: TextStyle(
+                                color: Color(0xFF171212),
+                              ),
+                              borderRadius: BorderRadius.circular(14.0),
+                            ),
                           ),
                           FFButtonWidget(
                             onPressed: () async {
